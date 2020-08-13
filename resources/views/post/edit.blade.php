@@ -7,7 +7,7 @@
   </div>
   <!-- /.card-header -->
   <!-- form start -->
-  <form role="form" action="/pertanyaan/{{ $show->id }}" method="POST">
+  <form role="form" action="{{ route('pertanyaan.update', ['pertanyaan' => $show->id])}}" method="POST">
     @csrf
     @method('put')
     <div class="card-body">

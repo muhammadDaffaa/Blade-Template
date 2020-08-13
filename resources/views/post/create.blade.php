@@ -7,7 +7,7 @@
   </div>
   <!-- /.card-header -->
   <!-- form start -->
-  <form role="form" action="/pertanyaan" method="POST">
+  <form role="form" action="{{ route('pertanyaan.index') }}" method="POST">
     @csrf
     <div class="card-body">
       <div class="form-group">
@@ -20,7 +20,7 @@
 
       <div class="form-group">
         <label for="isi">Question</label>
-        <input type="text" class="form-control" id="isi" name="isi" value="{{ old('isi', '') }}"" placeholder="Masukkan Isi">
+        <input type="text" class="form-control" id="isi" name="isi" value="{{ old('isi', '') }}" placeholder="Masukkan Isi">
         @error('isi')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror

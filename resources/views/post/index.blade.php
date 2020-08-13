@@ -14,7 +14,7 @@
         {{ session('success') }}
       </div>
       @endif
-      <a href="/pertanyaan/create" class="btn btn-primary mb-2">Create New</a>
+      <a href="{{ route('pertanyaan.create') }}" class="btn btn-primary mb-2">Create New</a>
       <table class="table table-bordered">
         <thead>                  
           <tr>
@@ -37,10 +37,10 @@
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="/pertanyaan/{{ $pst->id }}">Show</a></li>
-                  <li><a href="/pertanyaan/{{ $pst->id }}/edit">Edit</a></li> 
+                  <li><a href="{{ route('pertanyaan.show', ['pertanyaan' => $pst->id])}}">Show</a></li>
+                  <li><a href="{{ route('pertanyaan.edit', ['pertanyaan' => $pst->id])}}">Edit</a></li> 
                   <li>
-                    <form action="/pertanyaan/{{ $pst->id }}" method="post">
+                    <form action="{{ route('pertanyaan.destroy', ['pertanyaan' => $pst->id])}}" method="post">
                       @csrf
                     @method('delete')
                       <input type="submit" value="delete">
