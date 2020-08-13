@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\post;
 use Illuminate\Http\Request;
 
 use DB;
 use Dotenv\Result\Success;
+
+use function GuzzleHttp\Promise\all;
 
 class PertanyaanController extends Controller
 {
@@ -14,9 +17,10 @@ class PertanyaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $post = DB::table('pertanyaan')->get();
+        $post = post::all();
         return view('post.index', compact('post'));
     }
 
@@ -42,11 +46,8 @@ class PertanyaanController extends Controller
             'judul' => 'required|unique:pertanyaan',
             'isi' => 'required'
         ]);
-        $query = DB::table('pertanyaan')->insert([
-            'judul' => $request['judul'],
-            'isi' => $request['isi']
 
-        ]);
+        post::create($request->all());
         return redirect('/pertanyaan')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -58,10 +59,7 @@ class PertanyaanController extends Controller
      */
     public function show($id)
     {
-        $show = DB::table('pertanyaan')
-            ->where('id', $id)
-            ->first();
-
+        $show = post::find($id);
         return view('post.detail', compact('show'));
     }
 
@@ -73,9 +71,7 @@ class PertanyaanController extends Controller
      */
     public function edit($id)
     {
-        $show = DB::table('pertanyaan')
-            ->where('id', $id)
-            ->first();
+        $show = post::find($id);
         return view('post.edit', compact('show'));
     }
 
@@ -88,12 +84,7 @@ class PertanyaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'judul' => 'required',
-            'isi' => 'required'
-        ]);
-        $update = DB::table('pertanyaan')
-            ->where('id', $id)
+        post::where('id', $id)
             ->update([
                 'judul' => $request['judul'],
                 'isi' => $request['isi']
@@ -109,8 +100,7 @@ class PertanyaanController extends Controller
      */
     public function destroy($id)
     {
-        $delete = DB::table('pertanyaan')
-            ->where('id', $id)->delete();
+        post::destroy($id);
         return redirect('/pertanyaan')->with('success', 'Berhasil Di Hapus!');
     }
 }

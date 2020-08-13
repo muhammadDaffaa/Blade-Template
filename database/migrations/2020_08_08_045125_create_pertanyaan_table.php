@@ -19,6 +19,7 @@ class CreatePertanyaanTable extends Migration
             $table->longText('isi');
             $table->date('tanggal_dibuat')->nullable();
             $table->date('tanggal_diperbaharui')->nullable();
+            $table->timestamps();
         });
     }
 

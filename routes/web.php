@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('layouts.items.create');
+// });
 Route::get('/', function () {
-    return view('layouts.items.create');
+    return view('welcome');
 });
 
 Route::get('/master', function () {
@@ -29,10 +32,17 @@ Route::get('/items', function () {
 Route::get('/data-tables', function () {
     return view('layouts.partials.data-tables');
 });
-route::get('/pertanyaan/create', 'PertanyaanController@create');
-route::post('/pertanyaan', 'PertanyaanController@store');
-route::get('/pertanyaan', 'PertanyaanController@index');
-route::get('/pertanyaan/{id}', 'PertanyaanController@show');
-route::get('/pertanyaan/{id}/edit', 'PertanyaanController@edit');
-route::put('/pertanyaan/{id}', 'PertanyaanController@update');
-route::delete('/pertanyaan/{id}', 'PertanyaanController@destroy');
+
+// route::get('/pertanyaan/create', 'PertanyaanController@create');
+// route::post('/pertanyaan', 'PertanyaanController@store');
+// route::get('/pertanyaan', 'PertanyaanController@index');
+// route::get('/pertanyaan/{id}', 'PertanyaanController@show');
+// route::get('/pertanyaan/{id}/edit', 'PertanyaanController@edit');
+// route::put('/pertanyaan/{id}', 'PertanyaanController@update');
+// route::delete('/pertanyaan/{id}', 'PertanyaanController@destroy');
+
+route::resource('/pertanyaan', 'PertanyaanController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
